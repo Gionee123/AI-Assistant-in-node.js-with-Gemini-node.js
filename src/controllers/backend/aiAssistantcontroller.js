@@ -51,6 +51,7 @@ exports.view = async (req, res) => {
 exports.delete = async (req, res) => {
     console.log(req.params);
     try {
+
         const { id } = req.params;
         const chat = await AIAssistantModel.findByIdAndDelete(id);
         if (!chat) {
