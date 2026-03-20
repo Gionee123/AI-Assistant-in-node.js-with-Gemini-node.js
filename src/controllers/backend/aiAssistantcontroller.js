@@ -47,3 +47,18 @@ exports.view = async (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+
+exports.delete = async (req, res) => {
+    console.log(req.params);
+    try {
+        const { id } = req.params;
+        const chat = await AIAssistantModel.findByIdAndDelete(id);
+        if (!chat) {
+            return res.status(404).json({ error: "Chat not found" });
+        }
+        return res.json({ message: "Chat deleted successfully" });
+    } catch (error) {
+        console.error("Error in delete:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
